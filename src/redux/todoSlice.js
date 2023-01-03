@@ -1,23 +1,16 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getTodos } from './todoApi'
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    todos: [],
-    status: 'idle',
+    todos: []
 };
 
-export const getTodosAsync = createAsyncThunk(
-    'todo/getTodos',
-    async () => {
-        const response = await getTodos();
-        return response.data;
-    }
-);
-
 export const todoSlice = createSlice({
-    name: 'todo',
+    name: 'todos',
     initialState,
     reducers: {
+        setTodos: (state, action) => {
+            state.todos = action.payload
+        },
         deleteAllTodo: (state) => {
             state.todos = [];
         },
@@ -25,21 +18,10 @@ export const todoSlice = createSlice({
             state.todos = [];
         },
     },
-    extraReducers: (builder) => {
-        builder
-            .addCase(getTodosAsync.pending, (state) => {
-                state.status = 'loading';
-            })
-            .addCase(getTodosAsync.fulfilled, (state, action) => {
-                state.status = 'idle';
-                state.todos = action.payload;
-            });
-    },
 });
 
-export const { deleteAllTodo, deleteTodo } = todoSlice.actions
+export const { setTodos, deleteAllTodo, deleteTodo } = todoSlice.actions
 
-// need some works about this part
-export const selectTodosState = (state) => state.todo
+export const selectTodosState = (state) => state.todosGlobalState.todos
 
 export default todoSlice.reducer
