@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import todoReducer from './todoSlice'
+import userReducer from './userSlice'
 
-export const todoStore = configureStore({
+export const userStore = configureStore({
     reducer: {
-        todosGlobalState: todoReducer
+        userGlobalState: userReducer,
     }
 })

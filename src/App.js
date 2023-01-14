@@ -1,14 +1,12 @@
 import './App.css';
-import Header from './components/Header'
-import Section from './components/Section';
-import Footer from './components/Footer'
+import PageUser from './pages/PageUser';
 
 function App() {
+
   return (
     <div className="App">
-      <Header />
-      <Section />
-      <Footer />
+      {/* routes v5 atau v6 */}
+      <PageUser />
     </div>
   );
 }
